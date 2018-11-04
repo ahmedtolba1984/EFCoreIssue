@@ -13,6 +13,7 @@ namespace EFCoreIssue
     {
         public DbSet<Order> Orders { get; set; }
         public DbSet<OrderLine> OrderLines { get; set; }
+        public DbSet<Product> Products { get; set; }
 
         public OrdersDbContext()
         {
@@ -23,18 +24,5 @@ namespace EFCoreIssue
         {
             optionsBuilder.UseSqlServer(@"Server=localhost; Database=EFCoreIssue; Trusted_Connection=True;");
         }
-
-        public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = new CancellationToken())
-        {
-            foreach (var entry in ChangeTracker.Entries())
-            {
-                Console.WriteLine(entry.Entity);
-            }
-
-            return base.SaveChangesAsync(cancellationToken);
-        }
     }
-
-
-
 }
